@@ -1,6 +1,6 @@
-import Api from "./Api";
+import Api from "./Api.js";
 
 
-export function loadfData(){
+export async function loadfData(){
     app.store.menu = await Api.fetchMenu();
 }

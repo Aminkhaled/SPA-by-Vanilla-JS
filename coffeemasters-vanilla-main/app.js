@@ -1,11 +1,14 @@
-import Api from  "services/Api";
-import Store from  "services/store"
-import {loadfData} from "./services/menu";
-import Router from "./services/router";
+import Store from "./services/store.js";
+import Api from "./services/Api.js";
+import { loadfData } from "./services/menu.js";
+import Router from "./services/router.js";
 
-window.app ={};
+window.app = {};
 app.store = Store;
-window.addEventListener("DOMContentLoaded",async () => {
-      loadfData()
-    }
-)
+app.router = Router;
+
+window.addEventListener("DOMContentLoaded", async () => {
+
+     loadfData();
+    app.router.init();
+});
