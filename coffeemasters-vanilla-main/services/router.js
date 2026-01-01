@@ -14,22 +14,27 @@ const Router = {
              history.pushState({ page: router }, null, `${router}`);
          }
         let  pageElement = null;
-
+        let  element = null;
          switch (router) {
              case "/":
                  pageElement = "home";
+              element =     document.createElement("menu-page");
 
                  break;
                  case "/order":
                      pageElement = "order";
+                     element =     document.createElement("order-page");
+
                      break;
                      default:
-                         pageElement = "404";
+                         pageElement = "details";
+                         element =     document.createElement("details-page");
+
 
          }
          if(pageElement){
              document.querySelector('main').innerHTML = "";
-            let element =     document.createElement("h2");
+                console.log(element);
                 element.textContent = pageElement;
              document.querySelector('main').appendChild(element);
              window.scrollTo(0,0);
