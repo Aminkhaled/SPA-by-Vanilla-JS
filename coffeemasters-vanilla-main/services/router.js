@@ -2,11 +2,11 @@ const Router = {
      init: () => {
           document.querySelectorAll('a.navlink').forEach(link => link.addEventListener('click', e => {
               e.preventDefault();
-
-          Router.go(e.target.getAttribute('href'),true);
-
-          window.addEventListener('popstate', (e) => Router.go(e.state.page,false) );
+              Router.go(e.target.getAttribute('href'),true);
           }))
+          window.addEventListener('popstate', (e) => {
+              Router.go(e.state ? e.state.page : "/", false);
+          });
      },
      go: (router,addToHistory = true) => {
 
@@ -27,15 +27,17 @@ const Router = {
 
                      break;
                      default:
-                         pageElement = "details";
-                         element =     document.createElement("details-page");
+                         if (router.startsWith("/product-")) {
+                             element = document.createElement("details-page");
+                             pageElement = element;
+                             element.dataset.productId = router.substring(router.lastIndexOf("-")+1);
+                         }
+                         break;
 
 
          }
          if(pageElement){
              document.querySelector('main').innerHTML = "";
-                console.log(element);
-                element.textContent = pageElement;
              document.querySelector('main').appendChild(element);
              window.scrollTo(0,0);
          }
